@@ -1,18 +1,28 @@
 package com.edu.utp.models;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_notas")
 public class Nota {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long notaId;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Estudiante estudiante;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private ProfesorCurso profesorCurso;
+
+    //TODO: POSIBLE MODIFICACION / SE PODRIA USAR ESTA CLASE COMO NOTAS
 
     private int na1;
     private int na2;
@@ -31,6 +41,22 @@ public class Nota {
 
     public Nota() {
 
+    }
+
+    public Estudiante getEstudiante() {
+        return estudiante;
+    }
+
+    public void setEstudiante(Estudiante estudiante) {
+        this.estudiante = estudiante;
+    }
+
+    public ProfesorCurso getProfesorCurso() {
+        return profesorCurso;
+    }
+
+    public void setProfesorCurso(ProfesorCurso profesorCurso) {
+        this.profesorCurso = profesorCurso;
     }
 
     public Long getNotaId() {
@@ -138,19 +164,19 @@ public class Nota {
     }
 
     public Double getPromedioNa() {
-        return (double)((this.na1 * this.na2 * this.na3 * this.na4)/4);
+        return (double)((this.na1 + this.na2 + this.na3 + this.na4)/4);
     }
 
     public Double getPromedioNb() {
-        return (double)((this.nb1 * this.nb2 * this.nb3 * this.nb4)/4);
+        return (double)((this.nb1 + this.nb2 + this.nb3 + this.nb4)/4);
     }
 
     public Double getPromedioNc() {
-        return (double)((this.nc1 * this.nc2 * this.nc3 * this.nc4)/4);
+        return (double)((this.nc1 + this.nc2 + this.nc3 + this.nc4)/4);
     }
 
     public Double getPromedioFinal() {
-        return (this.getPromedioNa() * this.getPromedioNb() * this.getPromedioNc()) / 3;
+        return (this.getPromedioNa() + this.getPromedioNb() + this.getPromedioNc()) / 3;
     }
     
 }

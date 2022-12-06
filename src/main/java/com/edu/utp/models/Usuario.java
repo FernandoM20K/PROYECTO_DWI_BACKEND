@@ -7,15 +7,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "usuarios")
+@Table(name = "tb_usuarios")
 public class Usuario implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long usuarioId;
 
     private String username;
 
@@ -29,7 +30,9 @@ public class Usuario implements UserDetails {
 
     private String telefono;
 
-    private boolean enableb = true ;
+    private String direccion;
+
+    private boolean estado = true ;
 
     private String perfil;
 
@@ -37,16 +40,20 @@ public class Usuario implements UserDetails {
     @JsonIgnore
     private Set<UsuarioRol> UsuarioRoles = new HashSet<>();
 
+    @OneToMany(cascade =  CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "usuario")
+    @JsonIgnore
+    private List<Estudiante> estudiantes;
+
     public Usuario() {
 
     }
 
-    public Long getId() {
-        return id;
+    public Long getUsuarioId() {
+        return usuarioId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUsuarioId(Long usuarioId) {
+        this.usuarioId = usuarioId;
     }
 
     public String getUsername() {
@@ -97,12 +104,12 @@ public class Usuario implements UserDetails {
         this.telefono = telefono;
     }
 
-    public boolean isEnableb() {
-        return enableb;
+    public boolean isEstado() {
+        return estado;
     }
 
-    public void setEnableb(boolean enableb) {
-        this.enableb = enableb;
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 
     public String getPerfil() {
@@ -119,6 +126,22 @@ public class Usuario implements UserDetails {
 
     public void setUsuarioRoles(Set<UsuarioRol> usuarioRoles) {
         UsuarioRoles = usuarioRoles;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public List<Estudiante> getEstudiantes() {
+        return estudiantes;
+    }
+
+    public void setEstudiantes(List<Estudiante> estudiantes) {
+        this.estudiantes = estudiantes;
     }
 
     /* METODOS IMPLEMENTADOS DE USERDAILS */
@@ -150,6 +173,6 @@ public class Usuario implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return enableb;
+        return estado;
     }
 }

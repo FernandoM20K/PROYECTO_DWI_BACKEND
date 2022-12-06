@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.edu.utp.models.Estudiante;
 import com.edu.utp.models.Salon;
+import com.edu.utp.models.Usuario;
 import com.edu.utp.repositorys.EstudianteRepository;
 import com.edu.utp.services.EstudianteService;
 
@@ -47,6 +48,11 @@ public class EstudianteServiceImpl implements EstudianteService{
         Estudiante estudiante = new Estudiante();
         estudiante.setEstudianteId(estudianteId);
         estudianteRepository.delete(estudiante);
+    }
+
+    @Override
+    public Set<Estudiante> obtnerEstudiantesPorApoderado(Usuario usuario) {
+        return estudianteRepository.findByUsuario(usuario);
     }
     
 }

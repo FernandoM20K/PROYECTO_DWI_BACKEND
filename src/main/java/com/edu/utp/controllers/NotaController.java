@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.edu.utp.models.Estudiante;
 import com.edu.utp.models.Nota;
+import com.edu.utp.models.ProfesorCurso;
 import com.edu.utp.services.NotaService;
 
 @RestController
@@ -27,9 +29,25 @@ public class NotaController {
         return ResponseEntity.ok(notaService.obtenerNotas());
     }
 
+    @GetMapping("/cursos/{estudianteId}")
+    public ResponseEntity<?> listarNotasPorEstudiante(@PathVariable("estudianteId") Long estudianteId) {
+        Estudiante estudiante = new Estudiante();
+        estudiante.setEstudianteId(estudianteId);
+        return ResponseEntity.ok(notaService.obtenerNotasPorEstudiante(estudiante));
+    }
+
     @GetMapping("/{notaId}")
     public Nota listarNotaXId(@PathVariable("notaId") Long notaId) {
         return notaService.obtenerNota(notaId);
+    }
+
+    @GetMapping("/{estudianteId}/{profesorCursoId}")
+    public Nota listarNotaXEstudianteAndCurso(@PathVariable("estudianteId") Long estudianteId, @PathVariable("profesorCursoId") Long profesorCursoId) {
+        Estudiante estudiante = new Estudiante();
+        estudiante.setEstudianteId(estudianteId);
+        ProfesorCurso profesorCurso = new ProfesorCurso();
+        profesorCurso.setProfesorCursoId(profesorCursoId);
+        return notaService.obtenerNotaXEstuddianteAndCurso(estudiante, profesorCurso);
     }
 
     @PostMapping("/")

@@ -17,11 +17,12 @@ public class ProfesorCurso {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long profesorCursoId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "profesorId")
     private Profesor profesor;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cursoId")
     private Curso curso;
 

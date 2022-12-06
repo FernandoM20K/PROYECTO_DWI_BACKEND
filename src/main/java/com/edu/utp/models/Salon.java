@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_salones")
 public class Salon {
@@ -26,6 +28,7 @@ public class Salon {
     @JoinColumn(name = "sedeId")
     private Sede sede;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "salon")
     private List<Estudiante> estudiantes;
 

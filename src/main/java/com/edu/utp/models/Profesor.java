@@ -32,7 +32,7 @@ public class Profesor {
     private Double sueldo;
     private boolean estado;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "profesor")
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "profesor")
     @JsonIgnore
     private List<ProfesorCurso> profesorCursos;
 

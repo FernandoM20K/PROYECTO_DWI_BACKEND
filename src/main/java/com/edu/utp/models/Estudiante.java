@@ -3,6 +3,7 @@ package com.edu.utp.models;
 import java.util.Calendar;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,12 +36,11 @@ public class Estudiante {
     private Calendar fechaRetiro;
 
     @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "apoderadoId")
-    private Apoderado apoderado;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuarioId")
+    private Usuario usuario;
 
-    @JsonIgnore
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "salonId")
     private Salon salon;
 
@@ -120,20 +120,20 @@ public class Estudiante {
         this.fechaRetiro = fechaRetiro;
     }
 
-    public Apoderado getApoderado() {
-        return apoderado;
-    }
-
-    public void setApoderado(Apoderado apoderado) {
-        this.apoderado = apoderado;
-    }
-
     public Salon getSalon() {
         return salon;
     }
 
     public void setSalon(Salon salon) {
         this.salon = salon;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
 }

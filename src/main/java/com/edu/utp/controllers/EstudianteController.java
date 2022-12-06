@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.edu.utp.models.Estudiante;
 import com.edu.utp.models.Salon;
+import com.edu.utp.models.Usuario;
 import com.edu.utp.services.EstudianteService;
 
 @RestController
@@ -56,6 +57,14 @@ public class EstudianteController {
         Salon salon = new Salon();
         salon.setSalonId(salonId);
         Set<Estudiante> estudiantes = estudianteService.obtnerEstudiantesPorSalon(salon);
+        return ResponseEntity.ok(estudiantes);
+    }
+
+    @GetMapping("/apoderado/{apoderadoId}")
+    public ResponseEntity<?> listarEstudiantePorApoderado(@PathVariable("apoderadoId") Long apoderadoId) {
+        Usuario usuario = new Usuario();
+        usuario.setUsuarioId(apoderadoId);
+        Set<Estudiante> estudiantes = estudianteService.obtnerEstudiantesPorApoderado(usuario);
         return ResponseEntity.ok(estudiantes);
     }
 
