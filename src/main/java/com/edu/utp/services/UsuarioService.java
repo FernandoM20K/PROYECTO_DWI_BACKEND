@@ -11,5 +11,7 @@ public interface UsuarioService {
 
     public Usuario obtenerUsuario(String username);
 
+    Set<Usuario> obtenerUsuariosPorFuncion(String funcion);
+
     public void eliminarUsuario(Long usuarioId);
 }

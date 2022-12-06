@@ -5,6 +5,7 @@ import com.edu.utp.models.Usuario;
 import com.edu.utp.models.UsuarioRol;
 import com.edu.utp.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import java.util.HashSet;
@@ -50,6 +51,11 @@ public class UsuarioController {
     @DeleteMapping("/{usuarioId}")
     public void eliminarUsuario(@PathVariable("usuarioId") Long usuarioId){
         usuarioService.eliminarUsuario(usuarioId);
+    }
+
+    @GetMapping("/{funcion}")
+    public ResponseEntity<?> listarUsuariosXFuncion(@PathVariable("funcion") String funcion) {
+        return ResponseEntity.ok(usuarioService.obtenerUsuariosPorFuncion(funcion));
     }
 
 }

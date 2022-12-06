@@ -36,6 +36,8 @@ public class Usuario implements UserDetails {
 
     private String perfil;
 
+    private String funcion;
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "usuario")
     @JsonIgnore
     private Set<UsuarioRol> UsuarioRoles = new HashSet<>();
@@ -144,6 +146,14 @@ public class Usuario implements UserDetails {
         this.estudiantes = estudiantes;
     }
 
+    public String getFuncion() {
+        return funcion;
+    }
+
+    public void setFuncion(String funcion) {
+        this.funcion = funcion;
+    }
+
     /* METODOS IMPLEMENTADOS DE USERDAILS */
 
     @Override
@@ -175,4 +185,5 @@ public class Usuario implements UserDetails {
     public boolean isEnabled() {
         return estado;
     }
+
 }

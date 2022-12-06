@@ -47,4 +47,9 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuarioRepository.deleteById(usuarioId);
     }
 
+    @Override
+    public Set<Usuario> obtenerUsuariosPorFuncion(String funcion) {
+        return usuarioRepository.findByFuncion(funcion);
+    }
+
 }
