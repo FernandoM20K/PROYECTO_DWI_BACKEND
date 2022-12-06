@@ -53,8 +53,8 @@ public class UsuarioController {
         usuarioService.eliminarUsuario(usuarioId);
     }
 
-    @GetMapping("/{funcion}")
-    public ResponseEntity<?> listarUsuariosXFuncion(@PathVariable("funcion") String funcion) {
+    @GetMapping("/")
+    public ResponseEntity<?> listarUsuariosXFuncion(@RequestParam String funcion) {
         return ResponseEntity.ok(usuarioService.obtenerUsuariosPorFuncion(funcion));
     }
 
